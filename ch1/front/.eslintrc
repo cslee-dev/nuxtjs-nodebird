@@ -8,10 +8,10 @@
     "node": true
   },
   "extends": [
-    "plugin:vue/recommended" // 뷰 권장
+    "plugin:vue/recommended"
+    // 뷰 권장
   ],
   "plugins": [],
   "rules": {
-
   }
 }
