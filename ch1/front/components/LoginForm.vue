@@ -74,8 +74,16 @@ export default {
   },
   methods: {
     onSubmitForm() {
-      this.$refs.form.validate();
-      console.log(this.valid);
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('users/logIn', {
+          email: this.email,
+          nickname: 'cslee'
+        }).then(() => {
+
+        }).catch(() => {
+
+        })
+      }
     },
     onLogOut() {
       this.$store.dispatch('users/logOut')
