@@ -1,9 +1,22 @@
 export const state = () => ({
-    name: 'users',
+    me: null,
 })
 
 export const mutations = {
-    bye(state) {
-        state.name = 'goodbye users'
+    setMe(state, payload) {
+        state.me = payload
+    },
+}
+
+export const actions = {
+    signUp({commit}, payload) {
+        commit('setMe', payload)
+    },
+    logIn({commit}, payload) {
+        commit('setMe', payload);
+
+    },
+    logOut({commit}, payload) {
+        commit('setMe', null)
     }
 }

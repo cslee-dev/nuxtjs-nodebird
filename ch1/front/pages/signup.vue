@@ -91,8 +91,17 @@ export default {
   },
   methods: {
     onSubmitForm() {
-      this.$refs.form.validate();
-      console.log(this.valid);
+      let vm = this;
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch('users/signUp', {
+          email: this.email,
+          nickname: this.nickname,
+        }).then(() => {
+          vm.$router.push({path: '/'})
+        }).catch(() => {
+          alert('회원가입 실패');
+        })
+      }
     }
   },
 }
