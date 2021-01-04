@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <post-form v-if="me" />
-    <post-card />
-    <post-card />
-    <post-card />
-    <post-card />
-    <post-card />
+    <post-card
+      v-for="post in mainPosts"
+      :post="post"
+      key="post.id"
+    />
   </v-container>
 </template>
 
@@ -27,7 +27,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('users', ['me'])
+    ...mapState('users', ['me']),
+    ...mapState('posts', ['mainPosts'])
   }
 }
 </script>

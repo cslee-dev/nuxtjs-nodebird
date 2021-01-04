@@ -1,5 +1,5 @@
 <template>
-  <v-card :style="{marginBottom:'20px;'}">
+  <v-card style="margin-bottom:20px;">
     <v-container>
       <v-form
         ref="form"
@@ -55,10 +55,12 @@ export default {
     ...mapState('users', ['me'])
   },
   methods: {
-    onChangeTextarea() {
-      this.hideDetails = true
-      this.success = false
-      this.successMessages = ''
+    onChangeTextarea(value) {
+      if (value.length) {
+        this.hideDetails = true
+        this.success = false
+        this.successMessages = ''
+      }
     },
     onSubmitForm() {
       let vm = this;
@@ -74,9 +76,9 @@ export default {
           createdAt: Date.now(),
         }).then(() => {
           vm.hideDetails = false
-          this.success = true
+          vm.success = true
           vm.successMessages = "게시글 등록 성공!"
-
+          vm.content = ''
         }).catch(() => {
 
         })
