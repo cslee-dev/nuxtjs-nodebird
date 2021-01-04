@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-card>
-      <v-form ref="form" v-model="valid" @submit.prevent="onSubmitForm">
+      <v-form ref="form"
+              v-model="valid"
+              @submit.prevent="onSubmitForm">
         <v-container>
           <v-text-field
               v-model="email"
