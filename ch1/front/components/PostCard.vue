@@ -4,8 +4,14 @@
       <v-img />
       <v-card-text>
         <div>
-          <h3>{{ post.User.nickname }}</h3>
-          <nuxt-link :to="{path:'/post/'+ post.id}">{{ post.content }}</nuxt-link>
+          <h3>
+            <nuxt-link :to="'/user/'+post.User.id">
+              {{ post.User.nickname }}
+            </nuxt-link>
+          </h3>
+          <nuxt-link :to="{path:'/post/'+ post.id}">
+            {{ post.content }}
+          </nuxt-link>
         </div>
       </v-card-text>
       <v-card-actions>

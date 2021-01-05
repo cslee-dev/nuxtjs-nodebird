@@ -15,12 +15,19 @@
         </v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
-          <v-text-field
-            label="검색"
-            hide-details="false"
-            prepend-icon="mdi-magnify"
-            :style="navBtnStyle"
-          />
+          <v-form @submit.prevent="onSearchHashtag">
+            <div :style="{display:'flex', height:'100%',alignItems:'center'}">
+              <v-text-field
+                v-model="hashtag"
+                label="검색"
+                hide-details="false"
+                prepend-icon="mdi-magnify"
+                :style="navBtnStyle"
+              />
+            </div>
+
+          </v-form>
+
           <v-btn
             text
             nuxt
@@ -67,6 +74,12 @@ export default {
   components: {
     LoginForm
   },
+  data() {
+    return {
+      hashtag: '',
+
+    }
+  },
   head: {
     title: "NodeBird"
   },
@@ -74,7 +87,15 @@ export default {
     navBtnStyle() {
       return {display: 'flex', alignItems: 'center'}
     }
-  }
+  },
+  methods: {
+    onSearchHashtag() {
+      this.$router.push({
+        path: `/hashtag/${this.hashtag}`
+      })
+      this.hashtag = ''
+    }
+  },
 }
 </script>
 
