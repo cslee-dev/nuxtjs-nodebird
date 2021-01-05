@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <profile-form />
-    <v-card style="margin-bottom:20px;" v-if="me">
+    <v-card
+      v-if="me"
+      style="margin-bottom:20px;"
+    >
       <v-container>
         <v-subheader>팔로잉</v-subheader>
         <follow-list
@@ -10,7 +13,10 @@
         />
       </v-container>
     </v-card>
-    <v-card style="margin-bottom:20px;" v-else>
+    <v-card
+      v-else
+      style="margin-bottom:20px;"
+    >
       <v-container>
         <v-subheader>팔로잉</v-subheader>
         <v-list>
@@ -20,7 +26,10 @@
         </v-list>
       </v-container>
     </v-card>
-    <v-card style="margin-bottom:20px;" v-if="me">
+    <v-card
+      v-if="me"
+      style="margin-bottom:20px;"
+    >
       <v-container>
         <v-subheader>팔로워</v-subheader>
         <follow-list
@@ -29,7 +38,10 @@
         />
       </v-container>
     </v-card>
-    <v-card style="margin-bottom:20px;" v-else>
+    <v-card
+      v-else
+      style="margin-bottom:20px;"
+    >
       <v-container>
         <v-subheader>팔로워</v-subheader>
         <v-list>
