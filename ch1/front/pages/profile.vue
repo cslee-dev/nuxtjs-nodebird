@@ -8,9 +8,16 @@
       <v-container>
         <v-subheader>팔로잉</v-subheader>
         <follow-list
-          :follow-list="followingList"
+          :users="followingList"
           :remove="removeFollowing"
         />
+        <v-btn
+          style="width:100%;"
+          @click="loadFollowings"
+          v-show="hasMoreFollowing"
+        >
+          더보기
+        </v-btn>
       </v-container>
     </v-card>
     <v-card
@@ -33,9 +40,16 @@
       <v-container>
         <v-subheader>팔로워</v-subheader>
         <follow-list
-          :follow-list="followerList"
+          :users="followerList"
           :remove="removeFollower"
         />
+        <v-btn
+          style="width:100%;"
+          @click="loadFollowers"
+          v-show="hasMoreFollower"
+        >
+          더보기
+        </v-btn>
       </v-container>
     </v-card>
     <v-card
@@ -57,7 +71,7 @@
 <script>
 import FollowList from '~/components/FollowList';
 import ProfileForm from '~/components/ProfileForm'
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: "Profile",
@@ -67,7 +81,7 @@ export default {
   },
   middleware: 'authenticated',
   computed: {
-    ...mapState('users', ['followerList', 'followingList', 'me'])
+    ...mapState('users', ['followerList', 'followingList', 'me', 'hasMoreFollowing', 'hasMoreFollower'])
   },
   methods: {
     removeFollower(user) {
@@ -75,7 +89,8 @@ export default {
     },
     removeFollowing(user) {
       this.$store.dispatch('users/removeFollowing', user)
-    }
+    },
+    ...mapActions('users', ['loadFollowers', 'loadFollowings'])
   },
 }
 </script>

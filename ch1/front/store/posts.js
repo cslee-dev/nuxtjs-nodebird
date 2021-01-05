@@ -4,6 +4,7 @@ export const state = () => ({
 })
 
 const limit = 10;
+const totalPosts = 51;
 
 export const mutations = {
     addMainPost(state, payload) {
@@ -18,7 +19,8 @@ export const mutations = {
         state.mainPosts[index].Comments.unshift(payload);
     },
     loadPosts(state) {
-        const fakePosts = Array(limit).fill().map(v => ({
+        const diff = totalPosts - state.mainPosts.length
+        const fakePosts = Array(diff > limit ? limit : diff).fill().map(v => ({
             id: Math.random().toString(),
             User: {
                 id: 1,
@@ -43,5 +45,8 @@ export const actions = {
     addComment({commit}, paylod) {
         commit('addComment', paylod)
     },
+    loadPosts({commit}){
+        commit('loadPosts')
+    }
 
 }

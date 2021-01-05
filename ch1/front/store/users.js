@@ -2,7 +2,12 @@ export const state = () => ({
     me: null,
     followerList: [{id: 1, nickname: '제플린'}, {id: 2, nickname: '맥북'}, {id: 3, nickname: 'nuxt'}],
     followingList: [{id: 1, nickname: '제플린'}, {id: 2, nickname: '맥북'}, {id: 3, nickname: 'nuxt'}],
+    hasMoreFollowing: true,
+    hasMoreFollower: true,
 })
+const limit = 3
+const totalFollowings = 13
+const totalFollowers = 8
 
 export const mutations = {
     setMe(state, payload) {
@@ -24,7 +29,26 @@ export const mutations = {
     removeFollowing(state, payload) {
         const index = state.followingList.findIndex(v => v.id === payload.id)
         state.followingList.splice(index, 1)
-    }
+    },
+    loadFollowers(state) {
+        const diff = totalFollowers - state.followerList.length;
+        const fakeUsers = Array(diff > limit ? limit : diff).fill().map(v => ({
+            id: Math.random(),
+            nickname: (Math.floor(Math.random() * 1000)).toString(),
+        }))
+        state.followerList = state.followerList.concat(fakeUsers)
+        state.hasMoreFollower = fakeUsers.length === limit
+    },
+    loadFollowings(state) {
+        const diff = totalFollowings - state.followingList.length;
+        const fakeUsers = Array(diff > limit ? limit : diff).fill().map(v => ({
+            id: Math.random(),
+            nickname: (Math.floor(Math.random() * 1000)).toString(),
+        }))
+        state.followingList = state.followingList.concat(fakeUsers)
+        state.hasMoreFollowing = fakeUsers.length === limit
+
+    },
 }
 
 export const actions = {
@@ -52,5 +76,16 @@ export const actions = {
     },
     removeFollowing({commit}, payload) {
         commit('removeFollowing', payload)
-    }
+    },
+    loadFollowers({commit, state}) {
+        if (state.hasMoreFollower) {
+            commit('loadFollowers')
+        }
+    },
+    loadFollowings({commit, state}) {
+        if (state.hasMoreFollowing) {
+            commit('loadFollowings')
+        }
+    },
+
 }

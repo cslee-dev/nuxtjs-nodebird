@@ -4,7 +4,7 @@
     <post-card
       v-for="post in mainPosts"
       :post="post"
-      key="post.id"
+      :key="post.id"
     />
   </v-container>
 </template>
@@ -26,9 +26,26 @@ export default {
       name: 'Nuxt.js',
     }
   },
+  fetch({store}) {
+    store.dispatch('posts/loadPosts');
+  },
   computed: {
     ...mapState('users', ['me']),
-    ...mapState('posts', ['mainPosts'])
+    ...mapState('posts', ['mainPosts', 'hasMorePost'])
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll)
+
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll)
+  },
+  methods: {
+    onScroll() {
+      if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300 && this.hasMorePost) {
+        this.$store.dispatch('posts/loadPosts')
+      }
+    }
   }
 }
 </script>
