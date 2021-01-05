@@ -72,7 +72,7 @@ export default {
           },
           Comments: [],
           Images: [],
-          id: Date.now().toString(),
+          id: Date.now(),
           createdAt: Date.now(),
         }).then(() => {
           vm.hideDetails = false

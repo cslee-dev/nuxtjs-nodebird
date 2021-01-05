@@ -62,6 +62,7 @@
 
 export default {
   name: "SignUp",
+  middleware: 'anonymous',
   data() {
     return {
       valid: false,
@@ -88,6 +89,20 @@ export default {
   },
   head: {
     title: '회원가입'
+  },
+  computed: {
+    me() {
+      return this.$store.state.users.me
+    }
+  },
+  watch: {
+    me(value) {
+      if (value) {
+        this.$router.push({
+          path: '/',
+        })
+      }
+    }
   },
   methods: {
     onSubmitForm() {

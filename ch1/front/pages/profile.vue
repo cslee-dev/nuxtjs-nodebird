@@ -65,6 +65,7 @@ export default {
     FollowList,
     ProfileForm
   },
+  middleware: 'authenticated',
   computed: {
     ...mapState('users', ['followerList', 'followingList', 'me'])
   },
@@ -75,7 +76,7 @@ export default {
     removeFollowing(user) {
       this.$store.dispatch('users/removeFollowing', user)
     }
-  }
+  },
 }
 </script>
 
