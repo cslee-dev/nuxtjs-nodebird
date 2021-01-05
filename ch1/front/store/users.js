@@ -11,11 +11,17 @@ export const mutations = {
     changeNickname(state, payload) {
         state.me.nickname = payload
     },
-    deleteFollower(state, payload) {
+    addFollower(state, payload) {
+        state.followerList.push(payload)
+    },
+    addFollowing(state, payload) {
+        state.followingList.push(payload)
+    },
+    removeFollower(state, payload) {
         const index = state.followerList.findIndex(v => v.id === payload.id)
         state.followerList.splice(index, 1)
     },
-    deleteFollowing(state, payload) {
+    removeFollowing(state, payload) {
         const index = state.followingList.findIndex(v => v.id === payload.id)
         state.followingList.splice(index, 1)
     }
@@ -35,10 +41,16 @@ export const actions = {
     changeNickname({commit}, payload) {
         commit('changeNickname', payload)
     },
-    deleteFollower({commit}, payload) {
-        commit('deleteFollower', payload)
+    addFollower({commit}, payload) {
+        commit('addFollower', payload)
     },
-    deleteFollowing({commit}, payload) {
-        commit('deleteFollowing', payload)
+    addFollowing({commit}, payload) {
+        commit('addFollowing', payload)
+    },
+    removeFollower({commit}, payload) {
+        commit('removeFollower', payload)
+    },
+    removeFollowing({commit}, payload) {
+        commit('removeFollowing', payload)
     }
 }

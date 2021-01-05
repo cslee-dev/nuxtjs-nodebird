@@ -9,7 +9,7 @@
         <v-subheader>팔로잉</v-subheader>
         <follow-list
           :follow-list="followingList"
-          event-name="Following"
+          :remove="removeFollowing"
         />
       </v-container>
     </v-card>
@@ -34,7 +34,7 @@
         <v-subheader>팔로워</v-subheader>
         <follow-list
           :follow-list="followerList"
-          event-name="Follower"
+          :remove="removeFollower"
         />
       </v-container>
     </v-card>
@@ -67,6 +67,14 @@ export default {
   },
   computed: {
     ...mapState('users', ['followerList', 'followingList', 'me'])
+  },
+  methods: {
+    removeFollower(user) {
+      this.$store.dispatch('users/removeFollower', user)
+    },
+    removeFollowing(user) {
+      this.$store.dispatch('users/removeFollowing', user)
+    }
   }
 }
 </script>
