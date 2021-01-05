@@ -1,33 +1,42 @@
 <template>
   <v-container>
-    <v-card style="margin-bottom:20px;">
-      <v-container>
-        <v-subheader>내 프로필</v-subheader>
-
-        <v-form>
-          <v-text-field
-            label="닉네임"
-            required
-          />
-          <v-btn
-            color="blue"
-            type="submit"
-          >
-            수정
-          </v-btn>
-        </v-form>
-      </v-container>
-    </v-card>
-    <v-card style="margin-bottom:20px;">
+    <profile-form />
+    <v-card style="margin-bottom:20px;" v-if="me">
       <v-container>
         <v-subheader>팔로잉</v-subheader>
-        <follow-list />
+        <follow-list
+          :follow-list="followingList"
+          event-name="Following"
+        />
       </v-container>
     </v-card>
-    <v-card style="margin-bottom:20px;">
+    <v-card style="margin-bottom:20px;" v-else>
+      <v-container>
+        <v-subheader>팔로잉</v-subheader>
+        <v-list>
+          <v-list-item>
+            <span>로그인이 필요한 서비스입니다.</span>
+          </v-list-item>
+        </v-list>
+      </v-container>
+    </v-card>
+    <v-card style="margin-bottom:20px;" v-if="me">
       <v-container>
         <v-subheader>팔로워</v-subheader>
-        <follow-list />
+        <follow-list
+          :follow-list="followerList"
+          event-name="Follower"
+        />
+      </v-container>
+    </v-card>
+    <v-card style="margin-bottom:20px;" v-else>
+      <v-container>
+        <v-subheader>팔로워</v-subheader>
+        <v-list>
+          <v-list-item>
+            <span>로그인이 필요한 서비스입니다.</span>
+          </v-list-item>
+        </v-list>
       </v-container>
     </v-card>
   </v-container>
@@ -35,12 +44,18 @@
 
 <script>
 import FollowList from '~/components/FollowList';
+import ProfileForm from '~/components/ProfileForm'
+import {mapState} from 'vuex'
 
 export default {
   name: "Profile",
   components: {
     FollowList,
+    ProfileForm
   },
+  computed: {
+    ...mapState('users', ['followerList', 'followingList', 'me'])
+  }
 }
 </script>
 
