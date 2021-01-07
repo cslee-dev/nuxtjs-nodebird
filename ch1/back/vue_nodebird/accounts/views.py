@@ -9,5 +9,4 @@ class AccountsSignupAPIView(APIView):
         return Response("hi")
 
     def post(self, request):
-        print(request)
         return Response(request.data, status=200)
