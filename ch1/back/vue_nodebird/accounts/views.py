@@ -1,12 +1,10 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
+
+from .serilaizers import NodeBirdUserModelSerializer
 
 
-class AccountsSignupAPIView(APIView):
-    def get(self, request):
-        print(request)
-        return Response("hi")
-
-    def post(self, request):
-        return Response(request.data, status=200)
+class AccountsSignupAPIView(CreateAPIView):
+    serializer_class = NodeBirdUserModelSerializer
